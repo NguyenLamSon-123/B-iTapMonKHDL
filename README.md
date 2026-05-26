@@ -1,2 +1,2 @@
-# B-iTapMonKHDL
-nguyễn lam sơn_K225480106076
+# BàiTapMonKHDL
+## nguyễn lam sơn_K225480106076
