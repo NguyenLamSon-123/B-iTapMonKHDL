@@ -1,4 +1,3 @@
-<img width="958" height="593" alt="image" src="https://github.com/user-attachments/assets/4baed740-29cb-47fe-9637-a411ab4b335f" /># BàiTapMonKHDL
 ## Nguyễn Lam Sơn_K225480106076
 [Bài Tập Khoa Học Dữ Liệu](https://www.youtube.com/watch?v=xpnhHjDMBHI)
 # Bài Tập Môn Khoa Học Dữ Liệu
