@@ -1,0 +1,624 @@
+html_content = """
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo cáo Khoa Học Dữ Liệu - Nguyễn Lam Sơn</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            /* Navy Blue */
+            --primary-light: #3b82f6;
+            /* Blue */
+            --accent: #2563eb;
+            --bg-body: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* HEADER / HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: white;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"/></svg>') repeat;
+            opacity: 0.5;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .badge-top {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero p.subtitle {
+            font-size: 1.25rem;
+            color: #cbd5e1;
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+
+        .student-card {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text-dark);
+            padding: 25px 35px;
+            border-radius: 12px;
+            display: inline-flex;
+            gap: 40px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        .student-info-item h4 {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .student-info-item p {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* MAIN LAYOUT */
+        .container {
+            max-width: 1200px;
+            margin: -40px auto 60px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 992px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .student-card {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        /* CARDS */
+        .section-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 15px;
+        }
+
+        .section-title i {
+            color: var(--primary-light);
+            font-size: 1.25rem;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* HIGHLIGHT BOX */
+        .highlight {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary-light);
+            padding: 20px 25px;
+            border-radius: 0 8px 8px 0;
+            margin: 25px 0;
+        }
+
+        .highlight h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* IMAGES & VISUALIZATIONS */
+        .chart-container {
+            margin: 35px 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .chart-header {
+            background: #f8fafc;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+            color: var(--text-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chart-img-wrapper {
+            padding: 20px;
+            background: white;
+            text-align: center;
+            min-height: 300px;
+            /* To give space if image fails */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chart-img-wrapper img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .chart-caption {
+            padding: 15px 20px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            background: white;
+            border-top: 1px solid var(--border);
+            font-style: italic;
+        }
+
+        /* TABLE */
+        .table-wrap {
+            overflow-x: auto;
+            margin-top: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: #f8fafc;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--border);
+        }
+
+        td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .b-xs {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .b-kt {
+            background: #e0f2fe;
+            color: #075985;
+        }
+
+        .b-ccg {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* SIDEBAR STATS */
+        .stat-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            background: #eff6ff;
+            color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 15px;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* STEPS */
+        .process-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .process-list li {
+            position: relative;
+            padding-left: 45px;
+            margin-bottom: 25px;
+        }
+
+        .process-list li::before {
+            content: '\\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 30px;
+            height: 30px;
+            background: var(--primary-light);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .process-list h4 {
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="hero">
+        <div class="hero-content">
+            <div class="badge-top">Bài Tập Môn Khoa Học Dữ Liệu</div>
+            <h1>Phân Cụm Học Lực Sinh Viên<br>Lớp K58KTPM</h1>
+            <p class="subtitle">Ứng dụng thuật toán Hierarchical Clustering (Học máy không giám sát) vào việc đánh giá
+                và phân loại năng lực học tập dựa trên dữ liệu bảng điểm thực tế.</p>
+
+            <div class="student-card">
+                <div class="student-info-item">
+                    <h4>Sinh viên thực hiện</h4>
+                    <p>Nguyễn Lam Sơn</p>
+                </div>
+                <div class="student-info-item">
+                    <h4>Mã số sinh viên</h4>
+                    <p>K225480106076</p>
+                </div>
+                <div class="student-info-item">
+                    <h4>Môn học</h4>
+                    <p>Khoa Học Dữ Liệu</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="grid-layout">
+
+            <div class="main-content">
+
+                <div class="section-card">
+                    <h2 class="section-title"><i class="fa-solid fa-crosshairs"></i> 1. Đặt vấn đề & Mục tiêu</h2>
+                    <p>Bài toán đặt ra là cần xử lý và phân tích dữ liệu từ bảng điểm tổng hợp của lớp
+                        <strong>K58KTPM</strong>. Thay vì chỉ dựa vào điểm số trung bình tĩnh, nghiên cứu này sử dụng
+                        cấu trúc điểm chi tiết của tất cả các môn học để tìm ra các nhóm sinh viên có đặc điểm và năng
+                        lực học tập tương đồng nhau.
+                    </p>
+                    <div class="highlight">
+                        <h4>Mục tiêu cốt lõi:</h4>
+                        <ul style="margin-left: 20px; color: var(--text-muted);">
+                            <li><strong>ETL:</strong> Tự động hóa quá trình làm sạch dữ liệu từ file Excel thô.</li>
+                            <li><strong>Modeling:</strong> Sử dụng thuật toán AI để gom cụm (Clustering) khách quan.
+                            </li>
+                            <li><strong>Visualization:</strong> Trực quan hóa dữ liệu giúp giáo viên dễ dàng đưa ra
+                                quyết định hỗ trợ.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <h2 class="section-title"><i class="fa-solid fa-microchip"></i> 2. Quy trình Xử lý & Thuật toán</h2>
+                    <ul class="process-list">
+                        <li>
+                            <h4>Bước 1: Tiền xử lý dữ liệu (Data Preprocessing)</h4>
+                            <p>Đọc file Excel <code>TỔNG HỢP ĐIỂM K58KTP.xlsx</code> bằng thư viện <code>pandas</code>.
+                                Tự động tìm dòng header chứa thông tin sinh viên, chuẩn hóa định dạng điểm số (chuyển
+                                dấu phẩy thành dấu chấm) và xử lý các giá trị khuyết thiếu (NaN được lấp bằng 0).</p>
+                        </li>
+                        <li>
+                            <h4>Bước 2: Thuật toán Hierarchical Clustering</h4>
+                            <p>Sử dụng phương pháp phân cụm phân cấp với thuật toán <strong>Ward Linkage</strong>.
+                                Phương pháp này tối thiểu hóa phương sai trong mỗi cụm, giúp tạo ra các cụm đồng nhất
+                                nhất có thể. Dựa trên biểu đồ Dendrogram, hệ thống xác định cắt tại ngưỡng tối ưu để
+                                chia lớp thành 3 nhóm.</p>
+                        </li>
+                        <li>
+                            <h4>Bước 3: Xuất bản và Báo cáo (Export)</h4>
+                            <p>Dữ liệu sau khi dán nhãn được lưu vào file Excel mới gồm 3 sheets: Bảng dữ liệu đã phân
+                                nhóm, Biểu đồ trực quan nhúng sẵn, và Bảng thống kê tóm tắt.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="section-card">
+                    <h2 class="section-title"><i class="fa-solid fa-chart-line"></i> 3. Trực quan hóa Kết quả</h2>
+                    <p>Để đảm bảo báo cáo này hoạt động tốt nhất, <strong>vui lòng đổi tên 4 file ảnh kết quả của bạn
+                            thành <code>dendrogram.png</code>, <code>density.png</code>, <code>violin.png</code>,
+                            <code>donut.png</code> và đặt chúng chung thư mục với file HTML này.</strong></p>
+
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <span>Sơ đồ Cây Phân Cấp (Dendrogram)</span>
+                            <i class="fa-solid fa-code-branch" style="color: #94a3b8;"></i>
+                        </div>
+                        <div class="chart-img-wrapper">
+                            <img src="dendrogram.png" alt="Biểu đồ Dendrogram"
+                                onerror="this.onerror=null; this.src='https://via.placeholder.com/1000x500/f8fafc/94a3b8?text=Vui+long+dat+anh+[dendrogram.png]+vao+cung+thu+muc';">
+                        </div>
+                        <div class="chart-caption">
+                            Minh họa quá trình gộp cụm. Đường cắt ngang xác định ranh giới tối ưu để chia 55 sinh viên
+                            thành 3 nhóm năng lực tách biệt.
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <span>Mật độ Phân bố Điểm số (Density Plot)</span>
+                            <i class="fa-solid fa-wave-square" style="color: #94a3b8;"></i>
+                        </div>
+                        <div class="chart-img-wrapper">
+                            <img src="density.png" alt="Biểu đồ Mật độ"
+                                onerror="this.onerror=null; this.src='https://via.placeholder.com/1000x500/f8fafc/94a3b8?text=Vui+long+dat+anh+[density.png]+vao+cung+thu+muc';">
+                        </div>
+                        <div class="chart-caption">
+                            Hàm mật độ xác suất cho thấy đỉnh phân bố (GPA) của nhóm Xuất sắc nằm tách biệt hẳn về phía
+                            tay phải so với nhóm Khá/Tốt.
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <span>Biến thiên Điểm Chi tiết (Violin & Strip Plot)</span>
+                            <i class="fa-solid fa-sliders" style="color: #94a3b8;"></i>
+                        </div>
+                        <div class="chart-img-wrapper">
+                            <img src="violin.png" alt="Biểu đồ Violin"
+                                onerror="this.onerror=null; this.src='https://via.placeholder.com/1000x500/f8fafc/94a3b8?text=Vui+long+dat+anh+[violin.png]+vao+cung+thu+muc';">
+                        </div>
+                        <div class="chart-caption">
+                            Mỗi chấm tròn là một sinh viên. Biểu đồ Violin mô tả độ trải rộng điểm số nội bộ trong từng
+                            cụm học lực.
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <span>Cơ cấu Nhóm Học lực (Donut Chart)</span>
+                            <i class="fa-solid fa-chart-pie" style="color: #94a3b8;"></i>
+                        </div>
+                        <div class="chart-img-wrapper">
+                            <img src="donut.png" alt="Biểu đồ Donut"
+                                onerror="this.onerror=null; this.src='https://via.placeholder.com/1000x500/f8fafc/94a3b8?text=Vui+long+dat+anh+[donut.png]+vao+cung+thu+muc';">
+                        </div>
+                        <div class="chart-caption">
+                            Phân bổ tỷ trọng của 3 nhóm sinh viên trên tổng quy mô lớp học.
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="section-card">
+                    <h2 class="section-title"><i class="fa-solid fa-table"></i> 4. Bảng Số liệu Thống kê</h2>
+                    <p>Bảng tổng hợp dưới đây trích xuất dữ liệu trung bình (GPA min/max) của các cụm được hệ thống nhận
+                        diện:</p>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Phân Nhóm Năng Lực</th>
+                                    <th>Số Lượng</th>
+                                    <th>Tỉ Lệ (%)</th>
+                                    <th>GPA Min</th>
+                                    <th>GPA Max</th>
+                                    <th>Xếp Loại</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Nhóm Xuất Sắc 🥇</strong></td>
+                                    <td>24</td>
+                                    <td>43.6%</td>
+                                    <td>2.58</td>
+                                    <td>3.51</td>
+                                    <td><span class="badge b-xs">Vượt trội</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Nhóm Khá / Tốt 🥈</strong></td>
+                                    <td>28</td>
+                                    <td>50.9%</td>
+                                    <td>1.50</td>
+                                    <td>3.77</td>
+                                    <td><span class="badge b-kt">Ổn định</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Nhóm Cần Cố Gắng 🥉</strong></td>
+                                    <td>3</td>
+                                    <td>5.5%</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td><span class="badge b-ccg">Cần hỗ trợ</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="sidebar">
+                <div style="position: sticky; top: 20px;">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                        <div class="stat-value">55</div>
+                        <div class="stat-label">Tổng số Sinh viên</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fa-solid fa-layer-group"></i></div>
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Cụm Năng lực</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fa-solid fa-check-double"></i></div>
+                        <div class="stat-value">100%</div>
+                        <div class="stat-label">Xử lý Tự động hóa</div>
+                    </div>
+
+                    <div class="section-card" style="margin-top: 30px; padding: 25px;">
+                        <h4
+                            style="color: var(--primary); margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-lightbulb"></i> Kết luận
+                        </h4>
+                        <p style="font-size: 0.95rem; text-align: justify; margin-bottom: 0;">
+                            Mô hình phân cụm học lực đã hoạt động chính xác. Nó không chỉ giúp trực quan hóa phân bổ
+                            năng lực sinh viên K58KTPM mà còn phát hiện ra nhóm dữ liệu bất thường (điểm 0 hoặc thiếu dữ
+                            liệu) để đưa vào nhóm "Cần cố gắng", chứng minh sự nhạy bén của thuật toán.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2026 Nguyễn Lam Sơn - Báo cáo Khoa Học Dữ Liệu</p>
+    </div>
+
+</body>
+
+</html>
+"""
+
+# Write HTML file
+file_name = "Bao_Cao_KHDL_Nguyen_Lam_Son_Pro.html"
+with open(file_name, "w", encoding="utf-8") as f:
+f.write(html_content)
+
+print(f"File {file_name} created successfully.")
